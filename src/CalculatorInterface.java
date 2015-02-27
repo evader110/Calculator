@@ -1,70 +1,75 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CalculatorInterface implements ActionListener{
+public class CalculatorInterface{
 	
-	static final int buttonIndex = 0;
+	static int buttonIndex = 0;
+	static final int DEFAULTLENGTH = 75;
 	
 	static JFrame frame;
 	static JPanel calculatorButtons = new JPanel();
-	static JButton[] buttons = new JButton[16];
-	static JLabel display = new JLabel("");
-	
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	static JPanel operatorButtons = new JPanel();
+	static CalculatorButton[] buttons = new CalculatorButton[10];
+	static CalculatorButton[] operators = new CalculatorButton[6];
+	static JLabel display = new JLabel("WELCOME TO THE GREATEST CALCULATOR ON EARTH!");
+	static ActionListener button;
 	
 	public static void initFrame(){
 		
 		frame = new JFrame("Java Calculator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(calculatorButtons, BorderLayout.SOUTH);
+		frame.add(calculatorButtons, BorderLayout.CENTER);
+		frame.add(operatorButtons, BorderLayout.EAST);
 		frame.add(display, BorderLayout.NORTH);
 		frame.setResizable(false);
-		frame.setPreferredSize(new Dimension(250,200));
+		//frame.setPreferredSize(new Dimension(300,250));
 		
 		frame.setVisible(true);
 		initCalcPanel();
+		initOperations();
 		frame.pack();
 	}
+	public static void initOperations(){
+		operatorButtons.setLayout(new FlowLayout());
+		operators[0] = new CalculatorButton('C', DEFAULTLENGTH, DEFAULTLENGTH, "C");
+		operators[1] = new CalculatorButton('*', DEFAULTLENGTH, DEFAULTLENGTH, "*");
+		operators[2] = new CalculatorButton('/', DEFAULTLENGTH, DEFAULTLENGTH, "/");
+		operators[3] = new CalculatorButton('+', DEFAULTLENGTH, DEFAULTLENGTH, "+");
+		operators[4] = new CalculatorButton('-', DEFAULTLENGTH, DEFAULTLENGTH, "-");
+		operators[5] = new CalculatorButton('=', DEFAULTLENGTH, DEFAULTLENGTH, "=");
+		for(int i = 0; i < operators.length; i++)
+		{
+			operatorButtons.add(operators[i]);
+		}
+	}
 	public static void initCalcPanel(){
-		calculatorButtons.setLayout(new GridLayout(4,4));
+		calculatorButtons.setLayout(new GridLayout(4,3));
 		initButtons();
 		for(int i = 1; i < buttons.length; i++){
 			calculatorButtons.add(buttons[i]);
 		}
-		calculatorButtons.add(buttons[0], 14);
+		calculatorButtons.add(buttons[0]);
+		
 	}
 	public static void initButtons(){
-		for(int i = 0; i < buttons.length; i++){
-			buttons[i] = new JButton("" + i);
-			buttons[i].addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					CalculatorInterface.display.setText("" + buttons[0].getText());
-				}
-			});
+		for(buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++){
+			buttons[buttonIndex] = new CalculatorButton(
+					new Integer(buttonIndex).toString().charAt(0), DEFAULTLENGTH, DEFAULTLENGTH, "" + buttonIndex);
 		}
-		buttons[4]  = new JButton("x");
-		buttons[8]  = new JButton("/");
-		buttons[12] = new JButton("+");
-		buttons[15] = new JButton("-");
 	}
 	
 	public static void main(String[] args){
 		initFrame();
 	}
 
-		
+	public static int getButtonIndex() {
+		return buttonIndex;
+	}	
 }
