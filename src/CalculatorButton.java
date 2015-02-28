@@ -57,7 +57,7 @@ public class CalculatorButton extends JButton {
 	public CalculatorButton(char symbol, int width, int height, String str)
 	{
 		super();
-		this.setPreferredSize(new Dimension(width, height));
+		this.setSize(new Dimension(width, height));
 		this.setText(str);
 		this.symbol = symbol;
 		

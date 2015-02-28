@@ -25,11 +25,12 @@ public class CalculatorInterface{
 		
 		frame = new JFrame("Java Calculator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(calculatorButtons, BorderLayout.CENTER);
+		
 		frame.add(operatorButtons, BorderLayout.EAST);
+		frame.add(calculatorButtons, BorderLayout.CENTER);
 		frame.add(display, BorderLayout.NORTH);
 		frame.setResizable(false);
-		//frame.setPreferredSize(new Dimension(300,250));
+		frame.setPreferredSize(new Dimension(500,400));
 		
 		frame.setVisible(true);
 		initCalcPanel();
@@ -37,32 +38,33 @@ public class CalculatorInterface{
 		frame.pack();
 	}
 	public static void initOperations(){
-		operatorButtons.setLayout(new FlowLayout());
+		operatorButtons.setLayout(new GridLayout(1, operators.length));
+		
 		operators[0] = new CalculatorButton('C', DEFAULTLENGTH, DEFAULTLENGTH, "C");
 		operators[1] = new CalculatorButton('*', DEFAULTLENGTH, DEFAULTLENGTH, "*");
 		operators[2] = new CalculatorButton('/', DEFAULTLENGTH, DEFAULTLENGTH, "/");
 		operators[3] = new CalculatorButton('+', DEFAULTLENGTH, DEFAULTLENGTH, "+");
 		operators[4] = new CalculatorButton('-', DEFAULTLENGTH, DEFAULTLENGTH, "-");
 		operators[5] = new CalculatorButton('=', DEFAULTLENGTH, DEFAULTLENGTH, "=");
-		for(int i = 0; i < operators.length; i++)
-		{
+		
+		for(int i = 0; i < operators.length; i++){
 			operatorButtons.add(operators[i]);
 		}
 	}
 	public static void initCalcPanel(){
+		
 		calculatorButtons.setLayout(new GridLayout(4,3));
-		initButtons();
+		
+		for(buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++){
+			buttons[buttonIndex] = new CalculatorButton(
+					new Integer(buttonIndex).toString().charAt(0), DEFAULTLENGTH, DEFAULTLENGTH, "" + buttonIndex);
+		}
+		
 		for(int i = 1; i < buttons.length; i++){
 			calculatorButtons.add(buttons[i]);
 		}
 		calculatorButtons.add(buttons[0]);
 		
-	}
-	public static void initButtons(){
-		for(buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++){
-			buttons[buttonIndex] = new CalculatorButton(
-					new Integer(buttonIndex).toString().charAt(0), DEFAULTLENGTH, DEFAULTLENGTH, "" + buttonIndex);
-		}
 	}
 	
 	public static void main(String[] args){
