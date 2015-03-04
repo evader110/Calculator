@@ -30,15 +30,12 @@ public class CalculatorButton extends JButton {
 
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("Button Pressed");
 				if(!(CalculatorButton.this.symbol == '=' || CalculatorButton.this.symbol == 'C'))
 				{
-					System.out.println("" + CalculatorButton.this.symbol);
 					CalculatorInterface.display.setText("" + CalculatorInterface.display.getText() + CalculatorButton.this.symbol);
 				}
 				else if(CalculatorButton.this.symbol == '=')
 				{
-					System.out.println("Equals");
 					try {
 						CalculatorInterface.display.setText("" + (engine.eval(CalculatorInterface.display.getText())));
 					} catch (ScriptException e1) {
