@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -17,7 +16,7 @@ public class CalculatorInterface{
 	static JPanel calculatorButtons = new JPanel();
 	static JPanel operatorButtons = new JPanel();
 	static CalculatorButton[] buttons = new CalculatorButton[10];
-	static CalculatorButton[] operators = new CalculatorButton[6];
+	static CalculatorButton[] operators = new CalculatorButton[5];
 	static JLabel display = new JLabel("WELCOME TO THE GREATEST CALCULATOR ON EARTH!");
 	static ActionListener button;
 	
@@ -38,14 +37,12 @@ public class CalculatorInterface{
 		frame.pack();
 	}
 	public static void initOperations(){
-		operatorButtons.setLayout(new GridLayout(1, operators.length));
-		
-		operators[0] = new CalculatorButton('C', DEFAULTLENGTH, DEFAULTLENGTH, "C");
+		operatorButtons.setLayout(new GridLayout(operators.length, 1));
+		operators[0] = new CalculatorButton('^',DEFAULTLENGTH,DEFAULTLENGTH,"^");
 		operators[1] = new CalculatorButton('*', DEFAULTLENGTH, DEFAULTLENGTH, "*");
 		operators[2] = new CalculatorButton('/', DEFAULTLENGTH, DEFAULTLENGTH, "/");
 		operators[3] = new CalculatorButton('+', DEFAULTLENGTH, DEFAULTLENGTH, "+");
 		operators[4] = new CalculatorButton('-', DEFAULTLENGTH, DEFAULTLENGTH, "-");
-		operators[5] = new CalculatorButton('=', DEFAULTLENGTH, DEFAULTLENGTH, "=");
 		
 		for(int i = 0; i < operators.length; i++){
 			operatorButtons.add(operators[i]);
@@ -64,7 +61,8 @@ public class CalculatorInterface{
 			calculatorButtons.add(buttons[i]);
 		}
 		calculatorButtons.add(buttons[0]);
-		
+		calculatorButtons.add(new CalculatorButton('C', DEFAULTLENGTH, DEFAULTLENGTH, "C"));
+		calculatorButtons.add(new CalculatorButton('=', DEFAULTLENGTH, DEFAULTLENGTH, "="));		
 	}
 	
 	public static void main(String[] args){

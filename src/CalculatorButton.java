@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 public class CalculatorButton extends JButton {
 
-	
+	private static double answer;
 	public ActionListener actionListener;
 	
 	private static final long serialVersionUID = 1L;
@@ -30,22 +30,24 @@ public class CalculatorButton extends JButton {
 
 			public void actionPerformed(ActionEvent e)
 			{
-				if(!(CalculatorButton.this.symbol == '=' || CalculatorButton.this.symbol == 'C'))
-				{
-					CalculatorInterface.display.setText("" + CalculatorInterface.display.getText() + CalculatorButton.this.symbol);
-				}
-				else if(CalculatorButton.this.symbol == '=')
+				
+				if(CalculatorButton.this.symbol == '=')
 				{
 					try {
 						CalculatorInterface.display.setText("" + (engine.eval(CalculatorInterface.display.getText())));
+						answer = Double.parseDouble(CalculatorInterface.display.getText());
 					} catch (ScriptException e1) {
-						// TODO Auto-generated catch block
-					CalculatorInterface.display.setText("ERROR!");
+						CalculatorInterface.display.setText("ERROR!");
 					}
 				}
-				else if(CalculatorButton.this.symbol == 'C')
-				{
+				else if(CalculatorButton.this.symbol == 'C'){
 					CalculatorInterface.display.setText("");
+				}
+				else if(CalculatorButton.this.symbol == 'A'){
+					CalculatorInterface.display.setText(CalculatorInterface.display.getText() + answer);
+				}
+				else{
+						CalculatorInterface.display.setText("" + CalculatorInterface.display.getText() + CalculatorButton.this.symbol);
 				}
 			}
 		};
